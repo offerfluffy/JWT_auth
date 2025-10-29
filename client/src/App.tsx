@@ -25,10 +25,8 @@ function App() {
     }
   }
 
-  const authJSX = (
+  const UserListJSX = () => (
     <>
-      <h1>Authorized: {store.user.email}</h1>
-      <button onClick={() => store.logout()}>Logout</button>
       <button onClick={getUsers}>Get Users</button>
       {users?.map((user) => (
         <div key={user.id}>{user.email}</div>
@@ -36,10 +34,20 @@ function App() {
     </>
   );
 
+  const authJSX = (
+    <>
+      <h1>Authorized: {store.user.email}</h1>
+      <h1>{store.user.isActivated ? "Activated" : "Not Activated"}</h1>
+      <button onClick={() => store.logout()}>Logout</button>
+      <UserListJSX />
+    </>
+  );
+
   const unauthJSX = (
     <>
       <h1>Not Authorized</h1>
       <LoginFrom />
+      <UserListJSX />
     </>
   );
 
